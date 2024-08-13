@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block start %}
+<div class="container">
+  <form method="post" class="mt-5 my-4 card p-3 shadow-lg" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2>Add Recipe</h2>
+    <hr>
+    <div class="mb-3">
+      <label for="recepieName" class="form-label">Recipe Name</label>
+      <input type="text" name="recepie_name" class="form-control" id="recepieName" required>
+    </div>
+    <div class="mb-3">
+      <label for="recepieDescription" class="form-label">Description</label>
+      <textarea class="form-control" name="recepie_description" id="recepieDescription" required></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="recepieImage" class="form-label">Upload Image</label>
+      <input type="file" name="recepie_image" class="form-control" id="recepieImage">
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Recipe</button>
+  </form>
+  <br>
+  {% if recepies %}
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in recepies %}
+      <tr>
+        <td>{{ r.id }}</td>
+        <td>{{ r.recepie_name }}</td>
+        <td>{{ r.recepie_description }}</td>
+        <td>
+          <img src="/media/{{ r.recepie_image }}" style="height: 200px;">
+        </td>
+        <td>
+          <a href="/delete-recepies/{{ r.id }}" class="btn btn-danger">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</div>
+{% endblock %}

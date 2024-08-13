@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block start %}
+  <h1>This is Index page</h1>
+    {{people}}
+    <table style="border: 1px solid black">
+        <tr>
+          <th>S.no</th>
+          <th>Name</th>
+          <th>age</th>
+        </tr>
+        {%for p in people%}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{p.name}}</td>
+          <td>{{p.age}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <p>
+        {% if "cucumber"  in vegetables %}
+           yes Available
+        {% elif "Tomato" in vegetables %}
+        yes Available
+        {% else %}
+           not Available
+        {% endif %}
+      </p>
+      <a href="/contact/">Contact</a>
+      <a href="/about/">About</a>
+      {% endblock %}
